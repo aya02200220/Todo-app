@@ -1,17 +1,35 @@
 import { useState } from "react";
 import styles from "../../styles/modules/modal.module.scss";
 import styles2 from "../../styles/modules/button.module.scss";
+import toast from "react-hot-toast";
 
 import { MdOutlineClose } from "react-icons/md";
+import { useDispatch } from "react-redux";
 
-// eslint-disable-next-line react/prop-types
+import { addTodo } from "../Slices/todoSlices";
+import { v4 as uuid } from "uuid";
+
 export const TodoModal = ({ modalOpen, setModalOpen }) => {
   const [title, setTitle] = useState();
   const [status, setStatus] = useState("incomplete");
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(title, status);
+    if (title && status) {
+      dispatch(
+        addTodo({
+          id: uuid(),
+          title,
+          status,
+          time: new Date().toLocaleString(),
+        })
+      );
+      toast.success("Todo Added!");
+    } else {
+      toast.error("Title is empty");
+    }
+    setModalOpen(false);
   };
 
   return (

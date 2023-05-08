@@ -2,6 +2,7 @@
 import { PageTitle } from "./components/PageTitle/PageTitle";
 import { AppHeader } from "./components/AppHeader/AppHeader";
 import { TodoContent } from "./components/TodoContent/TodoContent";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <TodoContent />
         </div>
       </div>
+      <Toaster toastOptions={{ style: { fontSize: "1.4rem" } }} />
     </>
   );
 }
