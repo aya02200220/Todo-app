@@ -46,7 +46,9 @@ export const TodoModal = ({ type, modalOpen, setModalOpen, todo }) => {
             <MdOutlineClose />
           </div>
           <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
-            <h1 className={styles.formTitle}>Add Todo</h1>
+            <h1 className={styles.formTitle}>
+              {type === "edit" ? "Edit" : "Add"} Todo
+            </h1>
             <label htmlFor="title">
               Title{" "}
               <input
@@ -69,7 +71,7 @@ export const TodoModal = ({ type, modalOpen, setModalOpen, todo }) => {
             </label>
             <div className={styles.buttonContainer}>
               <Button type="submit" variant="primary">
-                Add Todo
+                {type === "edit" ? "Update" : "Add"} Todo
               </Button>
               {/* <Button type="submit" variant="primary">
                 {type === "add" ? "Add Task" : "Update Task"}
