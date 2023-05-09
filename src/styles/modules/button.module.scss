@@ -15,52 +15,16 @@
     padding: 1rem;
     border: none;
     background-color: var(--bg-3);
+
     width: 150px;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  &__primary {
-    display: inline-block;
-    height: auto;
-    padding: 0.8rem 2rem;
-    border: none;
-    border-radius: 6px;
-    font-weight: 500;
-    font-size: 1.6rem;
-    text-decoration: none;
-    text-transform: capitalize;
-    cursor: pointer;
-    overflow: hidden;
-    background-color: var(--primaryPurple);
-    color: var(--white);
-  }
-  &__secondary {
-    display: inline-block;
-    height: auto;
-    padding: 0.8rem 2rem;
-    border: none;
-    border-radius: 6px;
-    font-weight: 500;
-    font-size: 1.6rem;
-    text-decoration: none;
-    text-transform: capitalize;
-    cursor: pointer;
-    overflow: hidden;
-    background-color: var(--bg-3);
-    color: var(--black-1);
-  }
-  &:hover {
-    color: var(--black-2);
-    border: none;
-    background-color: var(--bg-3);
     cursor: pointer;
   }
 }
-// .button__primary {
-//   background-color: var(--primaryPurple);
-//   color: var(--white);
-// }
-// .button__secondary {
-//   background-color: var(--bg-3);
-//   color: var(--black-1);
-// }
+.button--primary {
+  background-color: var(--primaryPurple);
+  color: var(--white);
+}
+.button--secondary {
+  background-color: var(--bg-3);
+  color: var(--black-1);
+}

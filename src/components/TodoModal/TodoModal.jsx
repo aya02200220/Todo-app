@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "../../styles/modules/modal.module.scss";
-import styles2 from "../../styles/modules/button.module.scss";
+import Button from "../Button/Button";
 import toast from "react-hot-toast";
 
 import { MdOutlineClose } from "react-icons/md";
@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { addTodo } from "../Slices/todoSlices";
 import { v4 as uuid } from "uuid";
 
-export const TodoModal = ({ modalOpen, setModalOpen }) => {
+export const TodoModal = ({ type, modalOpen, setModalOpen, todo }) => {
   const [title, setTitle] = useState();
   const [status, setStatus] = useState("incomplete");
   const dispatch = useDispatch();
@@ -68,17 +68,20 @@ export const TodoModal = ({ modalOpen, setModalOpen }) => {
               </select>
             </label>
             <div className={styles.buttonContainer}>
-              <button className={styles2.button__primary} type="submit">
+              <Button type="submit" variant="primary">
                 Add Todo
-              </button>
-              <button
+              </Button>
+              {/* <Button type="submit" variant="primary">
+                {type === "add" ? "Add Task" : "Update Task"}
+              </Button> */}
+              <Button
+                variant="secondary"
                 onClick={() => setModalOpen(false)}
                 onKeyDown={() => setModalOpen(false)}
-                className={styles2.button__secondary}
                 type="button"
               >
                 Cancel
-              </button>
+              </Button>
             </div>
           </form>
         </div>

@@ -33,6 +33,19 @@ export const todoSlice = createSlice({
         );
       }
     },
+    deleteTodo: (state, action) => {
+      const todoList = window.localStorage.getItem("todolist");
+      if (todoList) {
+        const todoListArr = JSON.perse(todoList);
+        todoListArr.forEach((todo, index) => {
+          if (todo.id === action.payload) {
+            todoListArr.splice(index, 1);
+          }
+        });
+        window.localStorage.setItem("todoList", JSON.stringify(todoListArr));
+        state.todoList;
+      }
+    },
   },
 });
 

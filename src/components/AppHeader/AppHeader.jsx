@@ -9,7 +9,7 @@ export const AppHeader = () => {
   return (
     <div className={styles.appHeader}>
       {/* <Button onClick={() => setModalOpen(true)}>Add Todo</Button> */}
-      <Button modalOpen={modalOpen} setModalOpen={setModalOpen}>
+      <Button variant="primary" onClick={() => setModalOpen(true)}>
         Add Todo
       </Button>
       <SelectButton>
@@ -17,7 +17,7 @@ export const AppHeader = () => {
         <option value="incomplete">Incomplete</option>
         <option value="complete">complete</option>
       </SelectButton>
-      <TodoModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      <TodoModal type="add" modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </div>
   );
 };
