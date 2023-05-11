@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "../../styles/modules/app.module.scss";
 import { SelectButton } from "../Button/Button";
 import { TodoModal } from "../TodoModal/TodoModal";
