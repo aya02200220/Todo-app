@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { TodoItems } from "../TodoItems/TodoItems";
 import styles from "../../styles/modules/app.module.scss";
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const container = {
   hidden: { opacity: 1 },
@@ -11,6 +11,14 @@ const container = {
     transition: {
       staggerChildren: 0.2,
     },
+  },
+};
+
+const child = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
   },
 };
 
@@ -29,10 +37,21 @@ export const TodoContent = () => {
   });
 
   return (
-    <motion.div className={styles.content__wrapper}>
-      {filterTodoList && filterTodoList.length > 0
-        ? filterTodoList.map((todo) => <TodoItems key={todo.id} todo={todo} />)
-        : "no todo"}
+    <motion.div
+      className={styles.content__wrapper}
+      variants={container}
+      initial="hidden"
+      animate="visible"
+    >
+      <AnimatePresence>
+        {filterTodoList && filterTodoList.length > 0 ? (
+          filterTodoList.map((todo) => <TodoItems key={todo.id} todo={todo} />)
+        ) : (
+          <motion.p className={styles.emptyText} variants={child}>
+            No Todo Found
+          </motion.p>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };

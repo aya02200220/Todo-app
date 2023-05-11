@@ -8,6 +8,28 @@ import { useDispatch } from "react-redux";
 
 import { addTodo, updateTodo } from "../Slices/todoSlices";
 import { v4 as uuid } from "uuid";
+import { AnimatePresence, motion } from "framer-motion";
+
+const dropIn = {
+  hidden: {
+    opacity: 0,
+    transform: "scale(0.9)",
+  },
+  visible: {
+    transform: "scale(1)",
+    opacity: 1,
+    transition: {
+      duration: 0.1,
+      type: "spring",
+      damping: 25,
+      stiffness: 500,
+    },
+  },
+  exit: {
+    transform: "scale(0.9)",
+    opacity: 0,
+  },
+};
 
 export const TodoModal = ({ type, modalOpen, setModalOpen, todo }) => {
   const [title, setTitle] = useState();
@@ -63,59 +85,71 @@ export const TodoModal = ({ type, modalOpen, setModalOpen, todo }) => {
   };
 
   return (
-    modalOpen && (
-      <div className={styles.wrapper}>
-        <div className={styles.container}>
-          <div
-            className={styles.closeButton}
-            onClick={() => setModalOpen(false)}
-            onKeyDown={() => setModalOpen(false)}
-            tabIndex={0}
-            role="button"
+    <AnimatePresence>
+      {modalOpen && (
+        <motion.div
+          className={styles.wrapper}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <motion.div
+            className={styles.container}
+            variants={dropIn}
+            initial="hidden"
+            animate="visible"
           >
-            <MdOutlineClose />
-          </div>
-          <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
-            <h1 className={styles.formTitle}>
-              {type === "edit" ? "Edit" : "Add"} Todo
-            </h1>
-            <label htmlFor="title">
-              Title{" "}
-              <input
-                type="text"
-                id="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </label>
-            <label htmlFor="status">
-              <select
-                name="status"
-                id="status"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-              >
-                <option value="incomplete">Incomplete</option>
-                <option value="complete">Complete</option>
-              </select>
-            </label>
-            <div className={styles.buttonContainer}>
-              <Button type="submit" variant="primary">
-                {type === "edit" ? "Update" : "Add Todo"}
-              </Button>
-
-              <Button
-                variant="secondary"
-                onClick={() => setModalOpen(false)}
-                onKeyDown={() => setModalOpen(false)}
-                type="button"
-              >
-                Cancel
-              </Button>
+            <div
+              className={styles.closeButton}
+              onClick={() => setModalOpen(false)}
+              onKeyDown={() => setModalOpen(false)}
+              tabIndex={0}
+              role="button"
+            >
+              <MdOutlineClose />
             </div>
-          </form>
-        </div>
-      </div>
-    )
+            <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
+              <h1 className={styles.formTitle}>
+                {type === "edit" ? "Edit" : "Add"} Todo
+              </h1>
+              <label htmlFor="title">
+                Title{" "}
+                <input
+                  type="text"
+                  id="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </label>
+              <label htmlFor="status">
+                <select
+                  name="status"
+                  id="status"
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                >
+                  <option value="incomplete">Incomplete</option>
+                  <option value="complete">Complete</option>
+                </select>
+              </label>
+              <div className={styles.buttonContainer}>
+                <Button type="submit" variant="primary">
+                  {type === "edit" ? "Update" : "Add Todo"}
+                </Button>
+
+                <Button
+                  variant="secondary"
+                  onClick={() => setModalOpen(false)}
+                  onKeyDown={() => setModalOpen(false)}
+                  type="button"
+                >
+                  Cancel
+                </Button>
+              </div>
+            </form>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
