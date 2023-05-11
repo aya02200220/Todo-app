@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../../styles/modules/modal.module.scss";
 import Button from "../Button/Button";
 import toast from "react-hot-toast";
@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { MdOutlineClose } from "react-icons/md";
 import { useDispatch } from "react-redux";
 
-import { addTodo } from "../Slices/todoSlices";
+import { addTodo, updateTodo } from "../Slices/todoSlices";
 import { v4 as uuid } from "uuid";
 
 export const TodoModal = ({ type, modalOpen, setModalOpen, todo }) => {
@@ -14,22 +14,45 @@ export const TodoModal = ({ type, modalOpen, setModalOpen, todo }) => {
   const [status, setStatus] = useState("incomplete");
   const dispatch = useDispatch();
 
+  useEffect(() => {});
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (title && status) {
-      dispatch(
-        addTodo({
-          id: uuid(),
-          title,
-          status,
-          time: new Date().toLocaleString(),
-        })
-      );
-      toast.success("Todo Added!");
-    } else {
-      toast.error("Title is empty");
+    if (title === "") {
+      console.log("error akunni");
+      toast.error("Please enter a title.");
     }
-    setModalOpen(false);
+    if (title && status) {
+      if (type === "add") {
+        dispatch(
+          addTodo({
+            id: uuid(),
+            title,
+            status,
+            time: new Date().toLocaleString(),
+          })
+        );
+        toast.success("Todo Added!");
+        setModalOpen(false);
+      }
+      if (type === "edit") {
+        console.log("title:", title, " todo.title:".todo.title);
+
+        if (todo.title !== title || todo.status !== status) {
+          dispatch(
+            updateTodo({
+              ...todo,
+              title,
+              status,
+            })
+          );
+        } else {
+          toast.error("There's no update");
+        }
+      }
+    } else {
+      toast.error("Enter a title.");
+    }
   };
 
   return (
@@ -71,11 +94,9 @@ export const TodoModal = ({ type, modalOpen, setModalOpen, todo }) => {
             </label>
             <div className={styles.buttonContainer}>
               <Button type="submit" variant="primary">
-                {type === "edit" ? "Update" : "Add"} Todo
+                {type === "edit" ? "Update" : "Add Todo"}
               </Button>
-              {/* <Button type="submit" variant="primary">
-                {type === "add" ? "Add Task" : "Update Task"}
-              </Button> */}
+
               <Button
                 variant="secondary"
                 onClick={() => setModalOpen(false)}
