@@ -99,15 +99,18 @@ export const TodoModal = ({ type, modalOpen, setModalOpen, todo }) => {
             initial="hidden"
             animate="visible"
           >
-            <div
+            <motion.div
               className={styles.closeButton}
               onClick={() => setModalOpen(false)}
               onKeyDown={() => setModalOpen(false)}
               tabIndex={0}
               role="button"
+              initial={{ top: 40, opacity: 0 }}
+              animate={{ top: -10, opacity: 1 }}
+              exit={{ top: 40, opacity: 0 }}
             >
               <MdOutlineClose />
-            </div>
+            </motion.div>
             <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
               <h1 className={styles.formTitle}>
                 {type === "edit" ? "Edit" : "Add"} Todo
