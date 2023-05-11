@@ -3,13 +3,17 @@ import styles from "../../styles/modules/app.module.scss";
 import { SelectButton } from "../Button/Button";
 import { TodoModal } from "../TodoModal/TodoModal";
 import Button from "../Button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { updateFilterStatus } from "../Slices/todoSlices";
 
 export const AppHeader = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [filterStatus, setFilterStatus] = useState(false);
+  const filterStatus = useSelector((state) => state.todo.filterStatus);
+  // const [filterStatus, setFilterStatus] = useState(initialFilterStatus);
+  const dispatch = useDispatch();
 
-  const updateFilter = () => {
-    console.log("undating");
+  const updateFilter = (e) => {
+    dispatch(updateFilterStatus(e.target.value));
   };
 
   return (
