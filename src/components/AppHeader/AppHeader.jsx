@@ -6,13 +6,18 @@ import Button from "../Button/Button";
 
 export const AppHeader = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [filterStatus, setFilterStatus] = useState(false);
+
+  const updateFilter = () => {
+    console.log("undating");
+  };
+
   return (
     <div className={styles.appHeader}>
-      {/* <Button onClick={() => setModalOpen(true)}>Add Todo</Button> */}
       <Button variant="primary" onClick={() => setModalOpen(true)}>
         Add Todo
       </Button>
-      <SelectButton>
+      <SelectButton id="status" value={filterStatus} onChange={updateFilter}>
         <option value="all">ALL</option>
         <option value="incomplete">Incomplete</option>
         <option value="complete">complete</option>

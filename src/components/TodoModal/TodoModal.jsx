@@ -14,12 +14,19 @@ export const TodoModal = ({ type, modalOpen, setModalOpen, todo }) => {
   const [status, setStatus] = useState("incomplete");
   const dispatch = useDispatch();
 
-  useEffect(() => {});
+  useEffect(() => {
+    if (type === "edit" && todo) {
+      setTitle(todo.title);
+      setStatus(todo.status);
+    } else {
+      setTitle("");
+      setStatus("incomplete");
+    }
+  }, [type, todo, modalOpen]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title === "") {
-      console.log("error akunni");
       toast.error("Please enter a title.");
     }
     if (title && status) {
@@ -36,8 +43,6 @@ export const TodoModal = ({ type, modalOpen, setModalOpen, todo }) => {
         setModalOpen(false);
       }
       if (type === "edit") {
-        console.log("title:", title, " todo.title:".todo.title);
-
         if (todo.title !== title || todo.status !== status) {
           dispatch(
             updateTodo({
@@ -46,12 +51,14 @@ export const TodoModal = ({ type, modalOpen, setModalOpen, todo }) => {
               status,
             })
           );
+          toast.success("Todo Updated!");
+          setModalOpen(false);
         } else {
           toast.error("There's no update");
         }
       }
     } else {
-      toast.error("Enter a title.");
+      // toast.error("Enter a title.");
     }
   };
 

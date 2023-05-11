@@ -79,4 +79,14 @@
   margin-top: 2rem;
   gap: 1rem;
 }
+
+.buttons__primary {
+  background-color: var(--primaryPurple);
+  color: var(--white);
+}
+
+.buttons__secondary {
+  background-color: var(--bg-3);
+  color: var(--black-1);
+}
 /*# sourceMappingURL=modal.module.css.map */
