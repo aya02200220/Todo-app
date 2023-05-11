@@ -11,6 +11,11 @@
   &:last-child {
     margin-bottom: 0;
   }
+  &--completed {
+    // background-color: gainsboro;
+    text-decoration: line-through;
+    opacity: 0.7;
+  }
 }
 .todoDetails {
   display: flex;
@@ -52,16 +57,17 @@
   font-size: 1.4rem;
   color: var(--black-2);
 
-  &--completed {
-    text-decoration: line-through;
-    opacity: 0.7;
-  }
+  // &--completed {
+  //   text-decoration: line-through;
+  //   opacity: 0.7;
+  //   background-color: gainsboro;
+  // }
 }
 .time {
   display: block;
   font-size: 1.2rem;
   font-weight: 300;
-  margin-top: -0.2rem;
+  margin-top: 0.1rem;
   color: var(--black-2);
 }
 .todoActions {

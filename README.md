@@ -2,4 +2,4 @@
 
 Simle Todo app
 
-Using React + vite , Redux-toolkit
+Using React + vite , Redux-toolkit, Local storage

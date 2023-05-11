@@ -57,7 +57,7 @@ export const TodoItems = ({ todo }) => {
             <p
               className={getClasses([
                 styles.todoText,
-                todo.status === "complete" && styles["todoText--completed"],
+                todo.status === "complete" && styles["item--completed"],
               ])}
             >
               {todo.title}
