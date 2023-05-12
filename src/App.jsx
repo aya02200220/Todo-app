@@ -14,7 +14,12 @@ function App() {
           <TodoContent />
         </div>
       </div>
-      <Toaster toastOptions={{ style: { fontSize: "1.4rem" } }} />
+      <Toaster
+        toastOptions={{ style: { fontSize: "1.4rem" } }}
+        containerStyle={{
+          top: 60,
+        }}
+      />
     </>
   );
 }
